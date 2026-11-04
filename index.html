@@ -13,9 +13,18 @@
   button{font:inherit}
   .page{width:min(1100px,100%);margin:auto;padding:22px 22px 32px}
   .topline{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 4px 15px}
+  
+  /* 左上角標題與圖案超連結 */
+  .brand-link{text-decoration:none;display:inline-flex;align-items:center;color:inherit;transition:opacity .15s}
+  .brand-link:hover{opacity:.85}
   .brand{font-weight:900;letter-spacing:.04em;color:var(--leaf-dark);font-size:clamp(19px,3vw,25px)}
   .brand span{display:inline-grid;place-items:center;width:36px;height:36px;margin-right:8px;border-radius:50%;background:#fff5d7;box-shadow:0 3px 0 #d5c28b;font-size:20px;vertical-align:middle}
-  .source-pill{font-size:12px;color:#655e4e;background:#fff9e9c9;border:1px solid #e6d8b5;border-radius:99px;padding:7px 12px}
+  
+  /* 右上角返回網站首頁按鈕超連結 */
+  .source-pill{font-size:12px;color:#655e4e;background:#fff9e9c9;border:1px solid #e6d8b5;border-radius:99px;padding:7px 14px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-weight:700;transition:all .2s ease;box-shadow:0 2px 4px rgba(0,0,0,0.04)}
+  .source-pill:hover{background:#ffffff;border-color:#d4c49d;color:var(--leaf-dark);transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,0.08)}
+  .source-pill:active{transform:translateY(0)}
+
   .game{position:relative;overflow:hidden;border:1px solid #e8dcb7;border-radius:30px;background:linear-gradient(180deg,#fff9ea 0%,#fff5dd 48%,#f7f0d5 100%);box-shadow:var(--shadow);min-height:620px}
   .game:before,.game:after{content:"";position:absolute;pointer-events:none;border-radius:50%;background:#c7d69a55;filter:blur(1px)}
   .game:before{width:310px;height:220px;left:-145px;top:190px}.game:after{width:360px;height:260px;right:-190px;top:220px;background:#d5dba555}
@@ -34,13 +43,13 @@
   .intro-art .sun{position:absolute;width:230px;height:230px;top:28px;right:14%;border-radius:50%;background:#f7d788;opacity:.55;z-index:1}
   .intro-art .tree{position:absolute;bottom:24px;width:100%;height:210px;opacity:.88;z-index:2}
   
-  /* 首頁中間麋鹿：再放大並確實踏在地面 */
+  /* 首頁中間麋鹿：放大並確實踏在地面 */
   .intro-elk-img{
     position:absolute;
     z-index:20;
     bottom:4%;
     left:50%;
-    transform:translateX(-48%);
+    transform:translateX(-50%);
     max-width:98%;
     max-height:450px;
     height:auto;
@@ -207,7 +216,15 @@
 </head>
 <body>
 <div class="page">
-  <header class="topline"><div class="brand"><span aria-hidden="true">🦌</span>淡江大學麋鹿養成記</div><div class="source-pill">15 題校園知識冒險・免網路也能玩</div></header>
+  <header class="topline">
+    <!-- 左上角點擊返回網站首頁 -->
+    <a href="https://sites.google.com/view/tkumaptest/%E9%A6%96%E9%A0%81" target="_blank" class="brand-link" title="返回網站首頁">
+      <div class="brand"><span aria-hidden="true">🦌</span>淡江大學麋鹿養成記</div>
+    </a>
+    <!-- 右上角點擊返回網站首頁按鈕 -->
+    <a href="https://sites.google.com/view/tkumaptest/%E9%A6%96%E9%A0%81" target="_blank" class="source-pill" title="返回網站首頁">返回網站首頁 ↗</a>
+  </header>
+
   <main class="game" id="game">
     <section class="screen intro" id="intro" aria-labelledby="intro-title">
       <div class="intro-copy">
@@ -259,21 +276,21 @@
 
   const QUIZ_LENGTH = 15;
   const questionBank = [
-    {question:"校園空間代號「A」代表哪一棟？",answer:"行政大樓",distractors:["商管大樓","鍾靈化學館","工學大樓"],hint:"從清單中找出行政大樓對應的單一英文字母。"},
+    {question:"校園空間代號「A」代表哪一棟？",answer:"行政大樓",distractors:["商管大樓","鍾靈化學館","工學大樓"],hint:"可以去智慧導覽地圖偷偷查詢。"},
     {question:"商管大樓的建築代號是什麼？",answer:"B",distractors:["A","C","ED"],hint:"這是清單中的單一英文字母代號。"},
-    {question:"校園空間代號「C」代表哪一棟？",answer:"鍾靈化學館",distractors:["行政大樓","建築館","文學館"],hint:"它是清單中以化學為名的館舍。"},
+    {question:"學生證弄丟要重新補辦理，需要到哪棟建築找到註冊組？",answer:"行政大樓(Ａ)",distractors:["教育大樓(ED)","建築館(K)","文學館(L)"],hint:"可以去智慧導覽地圖偷偷查詢。它是清單中以化學為名的館舍。"},
     {question:"工學大樓的建築代號是什麼？",answer:"E",distractors:["B","G","K"],hint:"請分清工學大樓與工學館，兩者代號不同。"},
     {question:"校園空間代號「ED」代表哪一棟？",answer:"教育大樓",distractors:["行政大樓","商管大樓","宮燈教室"],hint:"這是清單中以教育為名的大樓。"},
     {question:"工學館的建築代號是什麼？",answer:"G",distractors:["E","C","K"],hint:"它不是「工學大樓」的代號。"},
     {question:"校園空間代號「HC」代表哪一處？",answer:"守謙國際會議中心",distractors:["覺生綜合大樓","學生活動中心","紹謨紀念活動中心"],hint:"這是清單中的國際會議中心。"},
-    {question:"建築館的建築代號是什麼？",answer:"K",distractors:["C","E","G"],hint:"依清單，這個館舍以單一英文字母標示。"},
-    {question:"校園空間代號「O」代表哪一處？",answer:"傳播館",distractors:["學生活動中心","商管大樓","教育大樓"],hint:"依使用者提供清單，O 的顯示名稱為傳播館。"},
-    {question:"校園空間代號「Q」代表哪一處？",answer:"傳播館",distractors:["學生活動中心","商管大樓","教育大樓"],hint:"依使用者提供清單，Q 的顯示名稱也為傳播館。"},
+    {question:"建築館的建築代號是什麼？",answer:"K",distractors:["C","E","G"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"校園空間代號「O、Q」代表哪一處？",answer:"傳播館",distractors:["學生活動中心","商管大樓","教育大樓"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"今天身體不舒服，需要到衛生保健組。衛生保健組所在的建築是哪一棟？",answer:"海事博物館（M）",distractors:["學生活動中心(R)","商管大樓（B)","教育大樓(ED)"],hint:"依使用者提供清單，Q 的顯示名稱也為傳播館。"},
     {question:"網球場的空間代號是什麼？",answer:"RT",distractors:["SS","XC","X"],hint:"它是兩個英文字母的空間代號。"},
-    {question:"校園空間代號「S」代表哪一棟？",answer:"騮先紀念科學館",distractors:["驚聲紀念大樓","工學館","鍾靈化學館"],hint:"請注意它與 T 所代表的建築不同。"},
+    {question:"下課想去重訓健身，健身房在哪棟建築？",answer:"紹謨紀念游泳館(Ｎ)",distractors:["驚聲紀念大樓(T)","工學館(G)","鍾靈化學館(C)"],hint:"請注意它與 T 所代表的建築不同。"},
     {question:"校園空間代號「T」代表哪一棟？",answer:"驚聲紀念大樓",distractors:["騮先紀念科學館","教育大樓","文學館"],hint:"清單中 T 對應的名稱含有「驚聲」。"},
-    {question:"校史館暨張建邦創辦人紀念館的空間代號是什麼？",answer:"TH",distractors:["ED","T","S"],hint:"這是兩個英文字母的代號。"},
-    {question:"校園空間代號「XC」代表哪一處？",answer:"五虎崗綜合球場",distractors:["五虎崗停車場","溜冰場","網球場"],hint:"它是綜合球場，不是停車場或其他球場。"}
+    {question:"你正面對著小木屋，在身後的建築物是哪一個？",answer:"文學館（L）",distractors:["商管大樓(B)","覺生綜合大樓(I)","紹謨紀念體育館(SG)"],hint:"這是兩個英文字母的代號。"},
+    {question:"段考快到了，自習室在哪棟建築？",answer:"覺生紀念圖書館(Ｕ)",distractors:["工學大樓(E)","會文館(F)","鍾靈化學館(H)"],hint:"它是綜合球場，不是停車場或其他球場。"}
   ];
 
   const intro = document.getElementById('intro');
