@@ -88,16 +88,43 @@
   .hint-button{border:0;background:transparent;text-decoration:underline;text-underline-offset:3px;color:#8c6740;font-size:13px;cursor:pointer;padding:3px 0}
   .hint-text{font-size:13px;color:#7e725c}
   .apple-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px auto 8px;max-width:900px}
-  .apple{position:relative;isolation:isolate;min-height:126px;border:0;border-radius:47% 47% 43% 43% / 39% 39% 58% 58%;background:radial-gradient(ellipse at 31% 22%,#ff9890 0 6%,transparent 22%),linear-gradient(145deg,#ec5a4c 2%,#d63835 52%,#a8202a 100%);box-shadow:inset -8px -10px 0 #8d172528,inset 6px 6px 0 #ffb1a02e,0 6px 0 #8d2429,0 12px 17px #773a2a24;color:white;font-weight:900;font-size:clamp(13px,1.6vw,16px);line-height:1.35;padding:22px 13px 14px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .18s,box-shadow .18s,filter .18s;display:flex;align-items:center;justify-content:center;text-align:center;text-shadow:0 1px 3px #661515b0}
+  .apple{position:relative;isolation:isolate;min-height:126px;border:0;border-radius:47% 47% 43% 43% / 39% 39% 58% 58%;background:radial-gradient(ellipse at 31% 22%,#ff9890 0 6%,transparent 22%),linear-gradient(145deg,#ec5a4c 2%,#d63835 52%,#a8202a 100%);box-shadow:inset -8px -10px 0 #8d172528,inset 6px 6px 0 #ffb1a02e,0 6px 0 #8d2429,0 12px 17px #773a2a24;color:white;font-weight:900;font-size:clamp(13px,1.6vw,16px);line-height:1.35;padding:22px 13px 14px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .18s,box-shadow .18s,filter .18s,opacity .25s;display:flex;align-items:center;justify-content:center;text-align:center;text-shadow:0 1px 3px #661515b0}
   .apple:before{content:"";position:absolute;z-index:-1;top:-9px;left:calc(50% - 3px);width:7px;height:19px;border-radius:8px;background:#665038;transform:rotate(7deg)}
   .apple:after{content:"";position:absolute;z-index:-1;top:-7px;left:calc(50% + 1px);width:17px;height:10px;border-radius:100% 0 100% 0;background:#5f9652;transform:rotate(-19deg)}
   .apple:hover{transform:translateY(-4px) rotate(-1deg);filter:brightness(1.05);box-shadow:inset -8px -10px 0 #8d172528,inset 6px 6px 0 #ffb1a02e,0 9px 0 #8d2429,0 15px 20px #773a2a2c}
   .apple:active{cursor:grabbing}.apple.selected{outline:4px solid #f5c84e;outline-offset:3px;transform:translateY(-4px)}
   .apple:focus-visible{outline:4px solid #f5c84e;outline-offset:4px}
   .apple.wrong{animation:wobble .36s ease}
+  
+  /* 選錯蘋果的明確錯誤標記樣式 */
+  .apple.wrong-marked{
+    background:linear-gradient(145deg,#8c7d78,#635652);
+    box-shadow:inset -6px -8px 0 #3e343140,0 4px 0 #463b38;
+    opacity:.75;
+    cursor:not-allowed;
+    text-decoration:line-through;
+    color:#f3eae8;
+  }
+  .apple.wrong-marked:hover{transform:none;filter:none}
+  .wrong-badge{
+    position:absolute;
+    top:6px;
+    right:6px;
+    background:#b91c1c;
+    color:#fff;
+    font-size:11px;
+    font-weight:900;
+    padding:2px 7px;
+    border-radius:99px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.3);
+    text-decoration:none;
+    display:inline-block;
+    letter-spacing:.03em;
+  }
+
   @keyframes wobble{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-4deg)}75%{transform:translateX(8px) rotate(4deg)}}
   .feedback{min-height:28px;text-align:center;font-weight:800;color:#577444;font-size:15px;margin:14px auto 4px}
-  .feedback.error{color:#a65347}.feedback.success{color:#3d754b}
+  .feedback.error{color:#b91c1c}.feedback.success{color:#3d754b}
   .instructions{text-align:center;color:#78715f;font-size:13px;margin:2px 0 0}
   .particles{position:absolute;inset:0;z-index:15;pointer-events:none;overflow:hidden}
   .particle{position:absolute;font-size:23px;animation:floatUp 950ms ease-out forwards;filter:drop-shadow(0 2px 2px #634a2450)}
@@ -108,7 +135,31 @@
   .complete h2{font-size:clamp(30px,5vw,46px);color:#36583d;margin:10px 0}
   .complete p{font-size:18px;line-height:1.8;color:#645d4c;max-width:620px;margin:12px auto 25px}
   .final-score{display:inline-block;border-radius:18px;background:#f0f3db;color:#47643f;padding:13px 22px;font-size:20px;font-weight:900;margin-bottom:25px}
-  .source-note{margin-top:22px;border-top:1px dashed #d8cdaa;padding-top:14px;text-align:left;color:#706956;font-size:12px;line-height:1.7}
+  
+  /* 最終結果選項回顧區塊 */
+  .review-section{max-width:780px;margin:32px auto 12px;text-align:left;background:#fffdf7;border:1px solid #e6d9b8;border-radius:22px;padding:clamp(16px,3vw,26px);box-shadow:0 8px 24px rgba(96,68,38,0.06)}
+  .review-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px dashed #e6d9b8}
+  .review-header h3{margin:0;font-size:19px;color:#344b34;display:flex;align-items:center;gap:8px}
+  .review-legend{font-size:12px;color:#6e6552;display:flex;gap:12px;flex-wrap:wrap}
+  .review-legend span{display:inline-flex;align-items:center;gap:4px}
+  .review-list{display:flex;flex-direction:column;gap:14px}
+  .review-item{background:#fff;border:1px solid #eadfbe;border-radius:16px;padding:15px 18px;transition:transform .15s}
+  .review-item.has-wrong{border-left:5px solid #d9534f}
+  .review-item.all-correct{border-left:5px solid #4c8c58}
+  .review-q-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+  .review-q-title{font-weight:850;font-size:16px;color:#3c4935;line-height:1.45}
+  .review-status-badge{font-size:12px;font-weight:800;padding:4px 10px;border-radius:99px;white-space:nowrap;flex-shrink:0}
+  .review-status-badge.ok{background:#e6f4ea;color:#2e6b3e}
+  .review-status-badge.err{background:#fdecea;color:#b91c1c}
+  .review-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .review-opt{font-size:13px;padding:8px 11px;border-radius:10px;border:1px solid #ebe3ce;background:#faf8f2;color:#5c5546;display:flex;align-items:center;justify-content:space-between;gap:6px}
+  .review-opt.opt-correct{background:#eaf6ed;border-color:#84c393;color:#215730;font-weight:800}
+  .review-opt.opt-wrong{background:#fdf0ef;border-color:#e69b98;color:#a82020;font-weight:700}
+  .opt-tag{font-size:11px;padding:2px 6px;border-radius:6px;white-space:nowrap;font-weight:800}
+  .opt-tag.correct{background:#2e6b3e;color:#fff}
+  .opt-tag.wrong{background:#c93335;color:#fff}
+
+  .source-note{margin-top:26px;border-top:1px dashed #d8cdaa;padding-top:14px;text-align:left;color:#706956;font-size:12px;line-height:1.7}
   .source-note a{color:#416744;overflow-wrap:anywhere}
   .drag-ghost{position:fixed;z-index:1000;pointer-events:none;transform:translate(-50%,-50%) scale(1.08) rotate(-4deg);opacity:.92;filter:drop-shadow(0 12px 10px #4d342c45)}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -186,6 +237,7 @@
     .complete{padding:28px 8px 24px}
     .complete p{font-size:16px}
     .final-score{max-width:100%;font-size:clamp(16px,4.5vw,20px);line-height:1.5;padding:11px 15px}
+    .review-options{grid-template-columns:1fr}
   }
 
   @media (max-width:380px){
@@ -236,7 +288,6 @@
       <div class="intro-art" aria-hidden="true">
         <div class="sun"></div>
         <svg class="tree" viewBox="0 0 500 210" preserveAspectRatio="none"><path d="M0 190 Q90 90 180 180 Q275 68 370 180 Q440 92 500 160 V210 H0Z" fill="#8faf70"/><path d="M0 205 Q120 135 240 199 Q370 130 500 190 V210 H0Z" fill="#668e5a"/><g fill="#4f7a4f"><path d="M58 163 90 72 122 163h-20v27H78v-27Z"/><path d="M355 160 390 55 425 160h-21v32h-28v-32Z"/><path d="M430 170 455 98 480 170h-15v23h-20v-23Z"/></g><g fill="#dce9ae"><circle cx="170" cy="175" r="4"/><circle cx="300" cy="176" r="4"/><circle cx="260" cy="156" r="3"/></g></svg>
-        <!-- 放大並精準著陸站在草地上的小麋鹿 1.webp -->
         <img src="1.webp" alt="可愛的麋鹿寶寶" class="intro-elk-img" />
       </div>
     </section>
@@ -266,6 +317,19 @@
     <section class="screen complete" id="complete" aria-labelledby="completeTitle">
       <div class="trophy" aria-hidden="true">🏆</div><h2 id="completeTitle">探險完成！</h2><div class="final-score" id="finalScore">最終分數 100 分・答對 0 / 15 題</div>
       <p id="completeMessage">麋鹿已經長大了！</p><button class="primary" id="restartButton">再玩一次 ↻</button>
+
+      <!-- 選項與作答回顧區塊 -->
+      <div class="review-section" id="reviewSection" aria-label="作答與選項回顧">
+        <div class="review-header">
+          <h3>📋 題目與選項回顧</h3>
+          <div class="review-legend">
+            <span>🟢 正確答案</span>
+            <span>🔴 曾選錯選項</span>
+          </div>
+        </div>
+        <div class="review-list" id="reviewList"></div>
+      </div>
+
       <div class="source-note"><strong>題目資料來源</strong><br>淡江大學空間代碼參考：<a href="https://tku.miraheze.org/wiki/zh-Hant/%E6%B7%A1%E6%B1%9F%E5%A4%A7%E5%AD%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E7%A2%BC" target="_blank" rel="noopener">淡江大學空間代碼</a><br>本測驗題目清單依此參考資料及使用者提供的代號／名稱清單編製；題目只考建築與空間代號配對。依使用者清單，O、Q 均以「傳播館」呈現，因此不設該名稱的反向題。</div>
     </section>
   </main>
@@ -277,20 +341,20 @@
   const QUIZ_LENGTH = 15;
   const questionBank = [
     {question:"校園空間代號「A」代表哪一棟？",answer:"行政大樓",distractors:["商管大樓","鍾靈化學館","工學大樓"],hint:"可以去智慧導覽地圖偷偷查詢。"},
-    {question:"商管大樓的建築代號是什麼？",answer:"B",distractors:["A","C","ED"],hint:"這是清單中的單一英文字母代號。"},
-    {question:"學生證弄丟要重新補辦理，需要到哪棟建築找到註冊組？",answer:"行政大樓(Ａ)",distractors:["教育大樓(ED)","建築館(K)","文學館(L)"],hint:"可以去智慧導覽地圖偷偷查詢。它是清單中以化學為名的館舍。"},
-    {question:"工學大樓的建築代號是什麼？",answer:"E",distractors:["B","G","K"],hint:"請分清工學大樓與工學館，兩者代號不同。"},
-    {question:"校園空間代號「ED」代表哪一棟？",answer:"教育大樓",distractors:["行政大樓","商管大樓","宮燈教室"],hint:"這是清單中以教育為名的大樓。"},
-    {question:"工學館的建築代號是什麼？",answer:"G",distractors:["E","C","K"],hint:"它不是「工學大樓」的代號。"},
-    {question:"校園空間代號「HC」代表哪一處？",answer:"守謙國際會議中心",distractors:["覺生綜合大樓","學生活動中心","紹謨紀念活動中心"],hint:"這是清單中的國際會議中心。"},
+    {question:"商管大樓的建築代號是什麼？",answer:"B",distractors:["A","C","ED"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"學生證弄丟要重新補辦理，需要到哪棟建築找到註冊組？",answer:"行政大樓(Ａ)",distractors:["教育大樓(ED)","建築館(K)","文學館(L)"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"工學大樓的建築代號是什麼？",answer:"E",distractors:["B","G","K"],hint:"工學大樓與工學館兩者代號不同哦～"},
+    {question:"校園空間代號「ED」代表哪一棟？",answer:"教育大樓",distractors:["行政大樓","商管大樓","宮燈教室"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"工學館的建築代號是什麼？",answer:"G",distractors:["E","C","K"],hint:"工學大樓與工學館兩者代號不同哦～"},
+    {question:"校園空間代號「HC」代表哪一處？",answer:"守謙國際會議中心",distractors:["覺生綜合大樓","學生活動中心","紹謨紀念活動中心"],hint:"可以去智慧導覽地圖偷偷查詢。"},
     {question:"建築館的建築代號是什麼？",answer:"K",distractors:["C","E","G"],hint:"可以去智慧導覽地圖偷偷查詢。"},
     {question:"校園空間代號「O、Q」代表哪一處？",answer:"傳播館",distractors:["學生活動中心","商管大樓","教育大樓"],hint:"可以去智慧導覽地圖偷偷查詢。"},
-    {question:"今天身體不舒服，需要到衛生保健組。衛生保健組所在的建築是哪一棟？",answer:"海事博物館（M）",distractors:["學生活動中心(R)","商管大樓（B)","教育大樓(ED)"],hint:"依使用者提供清單，Q 的顯示名稱也為傳播館。"},
-    {question:"網球場的空間代號是什麼？",answer:"RT",distractors:["SS","XC","X"],hint:"它是兩個英文字母的空間代號。"},
-    {question:"下課想去重訓健身，健身房在哪棟建築？",answer:"紹謨紀念游泳館(Ｎ)",distractors:["驚聲紀念大樓(T)","工學館(G)","鍾靈化學館(C)"],hint:"請注意它與 T 所代表的建築不同。"},
-    {question:"校園空間代號「T」代表哪一棟？",answer:"驚聲紀念大樓",distractors:["騮先紀念科學館","教育大樓","文學館"],hint:"清單中 T 對應的名稱含有「驚聲」。"},
-    {question:"你正面對著小木屋，在身後的建築物是哪一個？",answer:"文學館（L）",distractors:["商管大樓(B)","覺生綜合大樓(I)","紹謨紀念體育館(SG)"],hint:"這是兩個英文字母的代號。"},
-    {question:"段考快到了，自習室在哪棟建築？",answer:"覺生紀念圖書館(Ｕ)",distractors:["工學大樓(E)","會文館(F)","鍾靈化學館(H)"],hint:"它是綜合球場，不是停車場或其他球場。"}
+    {question:"今天身體不舒服，需要到衛生保健組。衛生保健組所在的建築是哪一棟？",answer:"海事博物館（M）",distractors:["學生活動中心(R)","商管大樓（B)","教育大樓(ED)"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"網球場的空間代號是什麼？",answer:"RT",distractors:["SS","XC","X"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"下課想去重訓健身，健身房在哪棟建築？",answer:"紹謨紀念游泳館(Ｎ)",distractors:["驚聲紀念大樓(T)","工學館(G)","鍾靈化學館(C)"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"校園空間代號「T」代表哪一棟？",answer:"驚聲紀念大樓",distractors:["騮先紀念科學館","教育大樓","文學館"],hint:"可以去智慧導覽地圖偷偷查詢。"},
+    {question:"你正面對著小木屋，在身後的建築物是哪一個？",answer:"文學館（L）",distractors:["商管大樓(B)","覺生綜合大樓(I)","紹謨紀念體育館(SG)"],hint:"想一想？"},
+    {question:"段考快到了，自習室在哪棟建築？",answer:"覺生紀念圖書館(Ｕ)",distractors:["工學大樓(E)","會文館(F)","鍾靈化學館(H)"],hint:"哪裡可以唸書呢？"}
   ];
 
   const intro = document.getElementById('intro');
@@ -315,8 +379,10 @@
   const hintText = document.getElementById('hintText');
   const particles = document.getElementById('particles');
   const stageArea = document.getElementById('stageArea');
+  const reviewList = document.getElementById('reviewList');
 
   let quizQuestions = [];
+  let quizHistory = []; // 記錄每題作答歷程與錯誤選項
   let questionIndex = 0;
   let score = 100;
   let correctCount = 0;
@@ -340,6 +406,12 @@
     quizQuestions = shuffle(questionBank).slice(0, Math.min(QUIZ_LENGTH, questionBank.length)).map(item => ({
       ...item,
       options: shuffle([item.answer, ...item.distractors])
+    }));
+    quizHistory = quizQuestions.map(q => ({
+      question: q.question,
+      answer: q.answer,
+      options: q.options,
+      wrongSelections: [] // 儲存該題曾選錯的選項文字
     }));
   }
 
@@ -384,11 +456,11 @@
       apple.dataset.optionIndex = String(index);
       apple.setAttribute('aria-label', `蘋果選項：${option}。可拖曳到麋鹿，或點擊選取`);
       apple.addEventListener('click', () => {
-        if (Date.now() < suppressClickUntil || answerLocked) return;
+        if (Date.now() < suppressClickUntil || answerLocked || apple.classList.contains('wrong-marked')) return;
         chooseOption(index);
       });
       apple.addEventListener('dragstart', event => {
-        if (answerLocked) { event.preventDefault(); return; }
+        if (answerLocked || apple.classList.contains('wrong-marked')) { event.preventDefault(); return; }
         event.dataTransfer.setData('text/plain', String(index));
         event.dataTransfer.effectAllowed = 'move';
         selectedOption = index;
@@ -413,8 +485,15 @@
     const dragSources = ['native-drag', 'pointer-drag'];
     if (recentAnswerAction && recentAnswerAction.index === index && dragSources.includes(recentAnswerAction.source) && dragSources.includes(source) && recentAnswerAction.source !== source && now - recentAnswerAction.time < 500) return;
     recentAnswerAction = {index, source, time: now};
+    
     const item = quizQuestions[questionIndex];
-    if (item.options[index] === item.answer) {
+    const chosenText = item.options[index];
+    const apple = appleGrid.querySelector(`[data-option-index="${index}"]`);
+
+    // 若該蘋果已經被標記選錯，則不再重複扣分
+    if (apple && apple.classList.contains('wrong-marked')) return;
+
+    if (chosenText === item.answer) {
       answerLocked = true;
       correctCount += 1;
       questionIndex += 1;
@@ -430,13 +509,29 @@
     } else {
       score = Math.max(0, score - 5);
       updateScore();
-      const apple = appleGrid.querySelector(`[data-option-index="${index}"]`);
+
+      // 記錄選錯的選項
+      const historyItem = quizHistory[questionIndex];
+      if (historyItem && !historyItem.wrongSelections.includes(chosenText)) {
+        historyItem.wrongSelections.push(chosenText);
+      }
+
+      // 在蘋果上顯示「錯誤」狀態與標籤
       if (apple) {
         apple.classList.remove('wrong');
         void apple.offsetWidth;
-        apple.classList.add('wrong');
+        apple.classList.add('wrong', 'wrong-marked');
+        apple.draggable = false;
+        apple.setAttribute('aria-disabled', 'true');
+        if (!apple.querySelector('.wrong-badge')) {
+          const badge = document.createElement('span');
+          badge.className = 'wrong-badge';
+          badge.textContent = '❌ 錯誤';
+          apple.appendChild(badge);
+        }
       }
-      feedback.textContent = `答錯了，扣 5 分（最低 0 分）！目前 ${score} 分。這顆蘋果先放回去，再試試別顆吧。`;
+
+      feedback.textContent = `❌ 選錯囉！「${chosenText}」不是正確答案，扣 5 分（目前 ${score} 分）。請再選別顆蘋果！`;
       feedback.className = 'feedback error';
       selectedOption = null;
       [...appleGrid.children].forEach(button => button.classList.remove('selected'));
@@ -498,16 +593,75 @@
     if (navigator.vibrate) navigator.vibrate(35);
   }
 
+  function renderReviewList() {
+    reviewList.innerHTML = '';
+    quizHistory.forEach((record, idx) => {
+      const hasWrong = record.wrongSelections.length > 0;
+      const itemDiv = document.createElement('div');
+      itemDiv.className = `review-item ${hasWrong ? 'has-wrong' : 'all-correct'}`;
+
+      const topDiv = document.createElement('div');
+      topDiv.className = 'review-q-top';
+
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'review-q-title';
+      titleSpan.textContent = `第 ${idx + 1} 題：${record.question}`;
+
+      const badgeSpan = document.createElement('span');
+      badgeSpan.className = `review-status-badge ${hasWrong ? 'err' : 'ok'}`;
+      badgeSpan.textContent = hasWrong ? `誤選 ${record.wrongSelections.length} 次` : '一次答對 ✨';
+
+      topDiv.appendChild(titleSpan);
+      topDiv.appendChild(badgeSpan);
+      itemDiv.appendChild(topDiv);
+
+      const optsGrid = document.createElement('div');
+      optsGrid.className = 'review-options';
+
+      record.options.forEach(optText => {
+        const optDiv = document.createElement('div');
+        const isCorrect = optText === record.answer;
+        const isWrongPicked = record.wrongSelections.includes(optText);
+
+        optDiv.className = 'review-opt';
+        if (isCorrect) optDiv.classList.add('opt-correct');
+        else if (isWrongPicked) optDiv.classList.add('opt-wrong');
+
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = optText;
+        optDiv.appendChild(labelSpan);
+
+        if (isCorrect) {
+          const tag = document.createElement('span');
+          tag.className = 'opt-tag correct';
+          tag.textContent = '✓ 正解';
+          optDiv.appendChild(tag);
+        } else if (isWrongPicked) {
+          const tag = document.createElement('span');
+          tag.className = 'opt-tag wrong';
+          tag.textContent = '✕ 曾選錯';
+          optDiv.appendChild(tag);
+        }
+
+        optsGrid.appendChild(optDiv);
+      });
+
+      itemDiv.appendChild(optsGrid);
+      reviewList.appendChild(itemDiv);
+    });
+  }
+
   function showCompletion() {
     quiz.style.display = 'none';
     complete.style.display = 'block';
     document.getElementById('finalScore').textContent = `最終分數 ${score} 分（答錯每次 −5 分，最低 0 分；答對不加分）・答對 ${correctCount} / ${QUIZ_LENGTH} 題`;
-    const message = correctCount === QUIZ_LENGTH
-      ? '太厲害了！你對淡江校園瞭若指掌，成功把小麋鹿養育成淡江頂級大神鹿！'
+    const message = correctCount === QUIZ_LENGTH && score === 100
+      ? '太厲害了！一題都沒錯拿到滿分，成功把小麋鹿養育成淡江頂級大神鹿！'
       : correctCount >= 10
-        ? '表現超棒！麋鹿已經成為壯年大麋鹿，再玩一次挑戰滿分吧！'
-        : '每一次探索都會有新發現！再玩一次，陪麋鹿認識更多校園建築代號。';
+        ? '表現超棒！麋鹿已經成為壯年大麋鹿，下方可以回顧剛剛的題目與選項喔！'
+        : '每一次探索都會有新發現！看看下方的選項回顧，再玩一次挑戰高分吧！';
     document.getElementById('completeMessage').textContent = message;
+    renderReviewList();
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
@@ -538,7 +692,7 @@
 
   document.addEventListener('pointerdown', event => {
     const apple = event.target.closest('.apple');
-    if (!apple || event.pointerType === 'mouse' || answerLocked) return;
+    if (!apple || event.pointerType === 'mouse' || answerLocked || apple.classList.contains('wrong-marked')) return;
     dragState = {index: Number(apple.dataset.optionIndex), startX: event.clientX, startY: event.clientY, apple, ghost: null, moved: false, pointerId: event.pointerId};
   }, {passive: true});
   document.addEventListener('pointermove', event => {
